@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    Count is {{ count}}
+    Count is {{count}}
     <button @click='increment'>+1</button>
   </div>
 </template>
