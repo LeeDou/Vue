@@ -20,7 +20,7 @@ const actions = {
 	increment :({commit}) => commit('increment')
 }
 const getters = {
-  count : state.count
+  count : state => state.count
 }
 // 整合初始状态和变更函数，我们就得到了我们所需的 store
 // 至此，这个 store 就可以连接到我们的应用中
