@@ -1,4 +1,4 @@
-# vuex
+# paycar
 
 > A Vue.js project
 

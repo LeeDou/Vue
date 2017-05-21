@@ -1,20 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    Count is {{ $store.state.count }}
+    <button @click="increment">+3</button>
+    <button @click="decrement">-2</button>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-import store from './vuex/store'
+import { mapGetters,mapActions } from 'vuex'
 
 export default {
   name: 'app',
-  components: {
-    Hello
-  },
-  store
+  computed: mapGetters([]),
+  methods: mapActions([
+    'increment',
+    'decrement'
+    ])
 }
 </script>
 
