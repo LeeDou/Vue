@@ -188,7 +188,7 @@ devServer: {
 `"dev":"webpack-dev-server --open"`
 
 然后输入命令：
-`npm run dev`    
+`npm run dev`      
+启动完成，浏览器会自动打开http://localhost:8080/页面     
 
-启动完成，浏览器会自动打开http://localhost:8080/页面
 ![hello](/img/hello.jpg)
