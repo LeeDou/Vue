@@ -192,3 +192,93 @@ devServer: {
 启动完成，浏览器会自动打开http://localhost:8080/页面     
 
 ![hello](/img/hello.jpg)
+
+### vue-loader 
+vue之所以强大，一个重要原因就是vue以组件化的模式进行开发，这样就会写.vue组件。
+```js
+<template>
+    <div id="app">
+        {{msg}}
+    </div>
+</template>
+<script>
+  export default {
+      name:'app',
+      data() {
+        return {
+          msg: 'hello world!'
+        }
+      }
+  }
+</script>
+```
+该文件需要通过vue-loader来进行加载，vue-template-compiler来编译。
+`npm install --save-dev vue-loader vue-template-compiler`
+webpack.config.js 文件做如下修改
+```js
+{
+  test: /\.vue$/,
+  loader: 'vue-loader',
+}
+```
+在src文件夹下新建App.vue文件
+```js
+<template>
+    <div id="app">
+        {{msg}}
+    </div>
+</template>
+<script>
+  export default {
+      name:'app',
+      data() {
+        return {
+          msg: 'hello world!'
+        }
+      }
+  }
+</script>
+```
+对index.js做如下修改：
+```js
+import Vue from 'vue'
+import './styles/main.css'
+import App from './App.vue'
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+})
+```
+修改完成后运行npm run dev 
+
+一般在vue组件中我们会完成样式，这样就需要我们使用scss、less、或styles
+样式
+`npm install sass-loader node-sass`
+webpack.config.js 修改如下：
+```js
+{
+  test: /\.scss$/,
+  loaders: ["vue-style-loader", "css-loader", "sass-loader"]
+},
+```
+这样就可以直接在vue组件内部使用
+```css
+<style lang="scss" scoped>
+.main {
+  background-color: pink;
+}
+</style>
+```
+
+### 热部署
+通过热部署，我们可以通过局部更新修改部分。   
+热更新需要使用HotModuleReplacementPlugin插件，在webpack.config.js中修改如下：
+```
+new webpack.HotModuleReplacementPlugin()
+```
+然后在package中，script语句中dev加上 --hot-only
+`"dev": "webpack-dev-server  --hot-only  --open"`
+再重启服务，修改msg的值，此时值的改变只会局部刷新。   
+
+至此，一个vue项目的配置基本完成。
