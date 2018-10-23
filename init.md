@@ -282,3 +282,6 @@ new webpack.HotModuleReplacementPlugin()
 再重启服务，修改msg的值，此时值的改变只会局部刷新。   
 
 至此，一个vue项目的配置基本完成。
+
+### 更多vue项目新建相关请移步
+[补充](farther.md)
