@@ -39,17 +39,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        // loader: 'style-loader!css-loader',
         // 提取css
-        // use: [
-        //   {
-        //     loader: MiniCssExtractPlugin.loader,
-        //     options: {
-        //       publicPath: '../'
-        //     }
-        //   },
-        //   'css-loader'
-        // ]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          'css-loader'
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -61,19 +61,25 @@ module.exports = {
       {
         test: /\.scss$/,
         // 将scss提取出来
-        // use: [
-        //   MinCssExtractPlugin.loader,
-        //   'css-loader',
-        //   'postcss-loader',
-        //   'sass-loader'
-        // ]
+        use: [
+          // MinCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ],
         // webpack3 
         // use: ExtractTextPlugin.extract({
         //   fallback: 'style-loader',
         //   use: ['css-loader', 'sass-loader']
         // })
         //
-        loaders: ["vue-style-loader", "css-loader", "sass-loader"]
+        // loaders: ["vue-style-loader", "css-loader", "sass-loader"]
       },
     ]
   }

@@ -18,7 +18,7 @@ module.exports = merge(base, {
  
 
   plugins: [
-    // 添加Sourcemap支持
+    // 添加Sourcemap支持， SourceMapDevToolPlugin/EvalSourceMapDevToolPlugin是对devtool 一种代替，不能同时使用两者，同时SourceMapDevToolPlugin可选更多的参数
     // new webpack.SourceMapDevToolPlugin({
     //   filename: '[file].map',
     //   exclude: ['vendor.js'] //vendor 通常不需要sourcemap
