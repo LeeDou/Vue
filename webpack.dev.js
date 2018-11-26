@@ -14,7 +14,18 @@ module.exports = merge(base, {
     open: true,
     hot: true
   },
+  // 添加Sourcemap支持
+ 
+
   plugins: [
+    // 添加Sourcemap支持
+    // new webpack.SourceMapDevToolPlugin({
+    //   filename: '[file].map',
+    //   exclude: ['vendor.js'] //vendor 通常不需要sourcemap
+    // }),
     new webpack.HotModuleReplacementPlugin()
   ]
 })
+// base.plugins.push(
+
+// )
