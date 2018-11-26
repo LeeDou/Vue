@@ -10,7 +10,7 @@ module.exports = merge(base, {
     contentBase: './dist',
     inline: true,
     // 指定端口号
-    port: 9000,
+    port: 8000,
     open: true,
     hot: true
   },
