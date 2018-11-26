@@ -19,3 +19,83 @@ module.exports = {}
     "prod": "webpack -p --config webpack.prod.js"
   }
 ```
+
+### 提高webpack打包速度
+- happypack  多线程打包   
+  HappyPack能够让webpack把任务分解成多个子进程去并发执行，子进程处理完后把结果发给主进程。
+  ```js
+  const HappyPack = require('happypack')
+  const os = require('os')
+  const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+
+  {
+    test: /\.js$/,
+    // loader: 'babel-loader',
+    loader: 'happypack/loader?id=babel', // 增加新的HappyPack构建loader
+    include: [resolve('src')],
+    exclude: /node_modules/,
+  }
+
+
+  new HappyPack({
+    id : "babel", // 和rules里的配置相同
+    threadPool: happyThreadPool,
+    cache : true,
+    loaders : [
+      {
+        loader : "babel-loader" ,
+        query: {
+          cacheDirectory: path.resolve(__dirname, "./.cache")
+        },
+        presets: [
+          "env", "stage-0"
+        ]
+      }
+    ]
+  })
+
+ 
+  
+  ```
+- dll  分离第三方依赖   
+  ```js
+   entry: {
+      vendor: [
+        'vue', 'vuex', 'vue-router', 'vuex-router-sync', 'babel-polyfill', '...'
+      ]
+    },
+    output: {
+      path: path.join(__dirname, './public/', 'dist'),
+      filename: '[name].dll.js',
+      library: '[name]_library' // 全局变量名，其它模块会从此此变量上获取里面的模块
+    },
+    plugins: [
+      new webpack.DllPlugin({
+        path: path.join(__dirname, './public/', 'dist', '[name]-manifest.json'),
+        name: '[name]_library'
+      })
+    ]
+  ```
+- 其他  提取公共代码
+```js
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5, // The default limit is too small to showcase the effect
+          minSize: 0, // This is example is too small to create commons chunks
+          name: 'common'
+        },
+        vendor: {
+					test: /node_modules/,
+					chunks: "initial",
+					name: "vendor",
+					priority: 10,
+					enforce: true
+				}
+      }
+    }
+  },
+```
