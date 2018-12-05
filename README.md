@@ -1,4 +1,4 @@
-## vue
+## vue  
 在master分支中包含两个vuedemo， 一个是paycar的简易购物车demo，另外一个是vue-cli脚手架生成的一个简易demo   
 
 另外这个仓库中还包含vuetemplate分支合webpacktemplate分支，这两个分支分别十一个简易的vue项目分支，另外一个有更加丰富的webpack配置，包含了生产环境和开发环境的配置。
