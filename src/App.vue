@@ -1,21 +1,18 @@
 <template>
   <div id="app">
-    Count is {{ $store.state.count }}
-    <button @click="increment">+3</button>
-    <button @click="decrement">-2</button>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import { mapGetters,mapActions } from 'vuex'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  computed: mapGetters([]),
-  methods: mapActions([
-    'increment',
-    'decrement'
-    ])
+  components: {
+    HelloWorld
+  }
 }
 </script>
 
